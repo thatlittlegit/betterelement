@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<!-- This guide/manual is for BetterElement 2.0 revision -1 (unfinished rev. 0) or 2.0/-1. If
+     you are using a more/less up-to-date edition, update this file.
+-->
+<head>
+  <title>BetterElement Manual</title>
+  <meta charset="utf-8">
+  <script src="betterelement.min.js"></script>
+</head>
+<body>
+  <h1>BetterElement 2.0/-1</h1>
+  <img src="http://img.shields.io/badge/code&nbsp;licensed&nbsp;using-MIT&nbsp;License-blue.svg" alt="MIT License">
+  <img src="http://img.shields.io/badge/since&nbsp;wapi-1.0/0-green.svg" alt="Since wAPI 1.0/0">
+  <h2>Default</h2>
+  <p>
+    BetterElement adds some tags by default. See creating your own below to make some yourself.
+    Below is the <code>&lt;clock&gt;</code> tag, in <code>time</code> mode specified by the
+    <code>type</code> attribute.
+  </p>
+  <clock type="time"></clock>
+  <p>
+    To prove that it works many times in an document, here is another. This one is in <code>date</code>
+    format specified by the <code>type</code> attribute.
+  </p>
+  <clock type="date"></clock>
+  <p>
+    There is also the <code>&lt;random&gt;</code> tag. Using the required <code>min</code> and <code>max</code>
+    attributes, it generates a random number between them. <code>&lt;random min="10" max="20"&gt;</code> would
+    produce <random min="10" max="20"></random>. You can reload the page to notice them change.
+  </p>
+  <h2>Creating your own</h2>
+  <p>
+    You can create your own by importing BetterElement and utilising the Element class to create and read elements.
+    To learn how, visit <a href="https://wapidstyle.github.io/wapi/subprojects/betterelement.html">
+    https://wapidstyle.github.io/wapi/subprojects/betterelement.html</a>.
+  </p>
+  <script>
+    betterElement()
+  </script>
+</body>
+</html>
