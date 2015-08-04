@@ -61,22 +61,25 @@ function createElement(name) {
 
 function Element(){
   var attributes;
-  var attributeCount = 0;
   var elements;
   var name;
   var toExecuteOnRead;
   var currentReadIndex;
   var currentReadElement;
 
-  this.addAttribute = function(attributename) {
-      this.attributes[attributeCount] = attributename;
+  this.addAttribute = function(attributeName) {
+      this.attributes[this.attributeCount()] = new Attribute(attributeName);
       this.attributeCount += 1;
   };
 
+  this.attributeCount = function(){
+    var count = 0;
+    for(; this.attributes[count] != undefined; count += 1){}
+    return count;
+  };
+
   this.delAttribute = function(attributename) {
-      var i = 0;
-      for (; this.attributes[i] != attributename; i += 1) {}
-      this.attributes[i] = "DELETED_ELEMENT";
+      this.attributes[count] = undefined;
   };
 
   this.readElements = function() {
@@ -99,4 +102,9 @@ function Element(){
   this.getAttributes = function() {
       return this.attributes;
   };
+}
+function Attribute(attributeName){
+  var name = attributeName;
+  var value;
+  var required = false;
 }
