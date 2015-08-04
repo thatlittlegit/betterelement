@@ -1,5 +1,5 @@
 /////////////////////////////////
-// BetterElement 2.0/0         /
+// BetterElement 2.0/1         /
 ////////////////////////////////
 var date = new Date();
 
@@ -68,10 +68,10 @@ function Element(){
   var currentReadIndex;
   var currentReadElement;
 
-  //this.addAttribute = function(attributename) {
-  //    this.attributes[attributeCount] = attributename;
-//      this.attributeCount += 1;
-//  };
+  this.addAttribute = function(attributename) {
+      this.attributes[attributeCount] = attributename;
+      this.attributeCount += 1;
+  };
 
   this.delAttribute = function(attributename) {
       var i = 0;
