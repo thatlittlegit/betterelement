@@ -61,46 +61,43 @@ function createElement(name) {
 
 function Element(){
   var attributes;
-  var elements;
+  var attributeExist;
+  var elementsToRead;
   var name;
-  var toExecuteOnRead;
-  var currentReadIndex;
-  var currentReadElement;
+  var toExecute;
+  var currentIndex;
 
-  this.addAttribute = function(attributeName) {
-      this.attributes[this.attributeCount()] = new Attribute(attributeName);
-      this.attributeCount += 1;
+  this.create = function(){
+
   };
 
-  this.attributeCount = function(){
+  var addAttribute = function(name) {
+    // AttributeExist MUST come first, otherwise attributeCount() will
+    // return incorrect value
+    attributeExist[attributeCount()] = true;
+    attributes[attributeCount()] = new Attribute(attributeName);
+  };
+
+  var attributeCount = function(){
     var count = 0;
-    for(; this.attributes[count] != undefined; count += 1){}
+    for(; attributes[count] !== undefined; count += 1){}
     return count;
   };
 
-  this.delAttribute = function(attributename) {
-      this.attributes[count] = undefined;
+  var delAttribute = function(attribute) {
+    attributes[findAttribute(attribute)] = undefined;
   };
 
-  this.readElements = function() {
-      this.elements = document.getElementsByTagName(this.name);
-      if (toExecuteOnRead === null) {
-          console.error(this.name + " executed readElements() without a toExecuteOnRead!");
+  var readElements = function() {
+      elements = document.getElementsByTagName(name);
+      if (toExecuteOnRead === undefined) {
+          console.error("BetterElement: Failed to read elements for element " + name + ", no changes will be applied!");
       } else {
-          for (var i = 0; this.elements[i] !== undefined; i += 1) {
-              this.currentReadIndex = i;
-              this.currentReadElement = this.elements[i];
-              this.toExecuteOnRead();
+          for (var i = 0; elements[i] !== undefined; i += 1) {
+              currentIndex = i;
+              toExecuteOnRead();
           }
       }
-  };
-
-  this.getElements = function() {
-      return document.getElementsByTagName(this.name);
-  };
-
-  this.getAttributes = function() {
-      return this.attributes;
   };
 
   var getIfAttributeExists = function(attributeIndex){
@@ -113,11 +110,11 @@ function Element(){
   };
 
   var findAttribute = function(attribute){
-    for(var i; attributes[i] !== undefined; return i){}
-  }
+    for(var i; attributes[i] !== undefined; i += 1){}
+    return i;
+  };
 }
 function Attribute(attributeName){
-  var InputType = new InputType();
   var name = attributeName;
   var value;
   var required = false;
@@ -132,18 +129,36 @@ function InputType(){
     switch(against){
       case 0:
         return true;
-      break;
       case 1:
-        if(toTest.parseInt() == NaN || toTest.parseDouble() == NaN){
+        if(toTest.parseInt().isNaN() === true || toTest.parseDouble().isNaN === true){
           return false;
         } else {
           return true;
         }
-      break;
-      /*
-       As it is impossible to test if a string is unique, you can NOT (for now) test
-       InputType.ID. This may be implemented through an array.
-      */
+      case 2:
+        // Use testIfCorrect(toTest, against, index) instead
+        console.warn("BetterElement: Got 2 (InputType.ID) as input, however no index specified!");
     }
-  }
+  };
+
+  this.testIfCorrect = function(toTest, against, index){
+    switch(against){
+      case 0:
+        return true;
+      case 1:
+        if(toTest.parseInt().isNaN() === true || toTest.parseDouble().isNaN() === true){
+          return false;
+        } else {
+          return true;
+        }
+      case 2:
+        var i;
+        for(; toTest[i] !== toTest[index] || i === index; i += 1){}
+        if(i == array.length){
+          return true;
+        } else {
+          return false;
+        }
+    }
+  };
 }
