@@ -102,9 +102,48 @@ function Element(){
   this.getAttributes = function() {
       return this.attributes;
   };
+
+  var getIfAttributeExists = function(attributeIndex){
+    if(attributes[attributeIndex] !== undefined &&
+      attributes[attributeIndex].value !== undefined){
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  var findAttribute = function(attribute){
+    for(var i; attributes[i] !== undefined; return i){}
+  }
 }
 function Attribute(attributeName){
+  var InputType = new InputType();
   var name = attributeName;
   var value;
   var required = false;
+  var type = InputType.TEXT;
+}
+function InputType(){
+  this.TEXT = 0;
+  this.NUMBER = 1;
+  this.ID = 2;
+
+  this.testIfCorrect = function(toTest, against){
+    switch(against){
+      case 0:
+        return true;
+      break;
+      case 1:
+        if(toTest.parseInt() == NaN || toTest.parseDouble() == NaN){
+          return false;
+        } else {
+          return true;
+        }
+      break;
+      /*
+       As it is impossible to test if a string is unique, you can NOT (for now) test
+       InputType.ID. This may be implemented through an array.
+      */
+    }
+  }
 }
