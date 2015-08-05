@@ -4,60 +4,62 @@
 var date = new Date();
 
 function betterElement() {
-  doClock();
-  doRandom();
+  DefaultElements.doClock();
+  DefaultElements.doRandom();
 }
+function DefaultElements(){
 
-function getTime() {
-  return date.toLocaleTimeString();
-}
+  var getTime = function() {
+    return date.toLocaleTimeString();
+  }
 
-function getDate() {
-  return date.toLocaleDateString();
-}
+  var getDate = function() {
+    return date.toLocaleDateString();
+  }
 
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min) + min);
-}
+  var getRandom = function(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
 
-function doClock() {
-  var clockElement = createElement("clock");
-  clockElement.toExecuteOnRead = function() {
-    if (clockElement.currentReadElement.getAttribute("type") == "time") {
-      clockElement.currentReadElement.innerHTML = getTime();
-    } else if (clockElement.currentReadElement.getAttribute("type") == "date") {
-      clockElement.currentReadElement.innerHTML = getDate();
-    } else {
-      clockElement.currentReadElement.innerHTML = "Failed to get time/date - invalid attribute";
-      console.error("Invalid attribute \"type\" on index " + clockElement.currentReadIndex + "!");
+  this.doClock = function() {
+    var clock = Element.create("clock");
+    var type = clock.addAttribute("type");
+    clock.toExecuteOnRead = function() {
+      if (clock.attributes[clock.findAttribute(type)] == "time") {
+        clock.elementsToRead[clock.currentIndex].innerHTML = getTime();
+      } else if (clock.attributes[clock.findAttribute(type)] == "date") {
+        clock.elementsToRead[clock.currentIndex].innerHTML = getDate();
+      } else {
+        clock.elementsToRead[clock.currentIndex].innerHTML = "???";
+        console.error("Invalid attribute \"type\" on index " + clock.currentIndex + "!");
+      }
+    };
+    clock.readElements();
+  }
+
+  this.doRandom = function() {
+    var random = createElement("random");
+    var minatt = random.addAttribute("min");
+    var maxatt = random.addAttribute("max");
+    random.readFailed = function(att){
+      console.warn("BetterElement: Index " + random.currentIndex + " missing " + att.name + " attribute!")
     }
-  };
-  clockElement.readElements();
-}
+    random.toExecuteOnRead = function() {
+      if (random.attributes[random.currentIndex] !== undefined
+          && random.attributes[random.currentIndex] !== undefined) {
+        var min = Number.parseInt(random.attributes[random.currentIndex].value);
+        var max = Number.parseInt(random.attributes[random.currentIndex].value);
+        random.currentReadElement.innerHTML = getRandom(min, max);
+      } else {
+        console.error("Error on index " + random.currentReadIndex + " of <random>;" +
+          "missing min or max parameter(s)!");
+      }
+    };
 
-function doRandom() {
-  var randomElement = createElement("random");
-  randomElement.toExecuteOnRead = function() {
-    if (randomElement.currentReadElement.getAttribute("min") !== undefined && randomElement.currentReadElement.getAttribute("max") !== undefined) {
-      var min = Number.parseInt(randomElement.currentReadElement.getAttribute("min"));
-      var max = Number.parseInt(randomElement.currentReadElement.getAttribute("max"));
-      randomElement.currentReadElement.innerHTML = getRandom(min, max);
-    } else {
-      console.error("Error on index " + randomElement.currentReadIndex + " of <random>;" +
-        "missing min or max parameter(s)!");
-    }
-  };
-  //randomElement.addAttribute("min");
-  //randomElement.addAttribute("max");
-  randomElement.readElements();
-}
+    random.readElements();
+  }
 
-function createElement(name) {
-  var blankElement = new Element();
-  blankElement.name = name;
-  return blankElement;
 }
-
 
 function Element() {
   var attributes;
@@ -66,16 +68,22 @@ function Element() {
   var name;
   var toExecute;
   var currentIndex;
+  var attributeMissing;
+  var elementsRead = false;
+  var readFailed;
 
-  this.create = function() {
-
+  this.create = function(name) {
+    var i = new Element();
+    i.name = name;
+    return i;
   };
 
   var addAttribute = function(name) {
     // AttributeExist MUST come first, otherwise attributeCount() will
     // return incorrect value
     attributeExist[attributeCount()] = true;
-    attributes[attributeCount()] = new Attribute(attributeName);
+    attributes[attributeCount()] = new Attribute(name);
+    return attributes[attributeCount()-1];
   };
 
   var attributeCount = function() {
@@ -89,13 +97,37 @@ function Element() {
   };
 
   var readElements = function() {
-    elements = document.getElementsByTagName(name);
+    elementsRead = true; // For later compat, couldn't find an event
+    elementsToRead = document.getElementsByTagName(name);
+    for(var count = 0; elementsToRead[count] !== undefined; count += 1){
+      attributes[count].value = elementsToRead[count].getAttribute(attributes[count].name);
+    }
     if (toExecuteOnRead === undefined) {
       console.error("BetterElement: Failed to read elements for element " + name + ", no changes will be applied!");
     } else {
+      var stopThisRead = false;
+      var missingAttribute;
       for (var i = 0; elements[i] !== undefined; i += 1) {
         currentIndex = i;
-        toExecuteOnRead();
+        for(var x = 0; x == attributes.length; i += 1) {
+          if(attributes[x].required == true && attributes[x].value === undefined){
+            attributes[x].missing = true;
+            stopThisRead = true;
+            missingAttribute = attributes[x];
+          } else {
+            stopThisRead = false;
+          }
+        }
+        if(stopThisRead !== true){
+          toExecute();
+        } else {
+          if(readFailed === undefined){
+          } else {
+            readFailed(missingAttribute);
+            missingAttribute = undefined;
+            stopThisRead = false;
+          }
+        }
       }
     }
   };
