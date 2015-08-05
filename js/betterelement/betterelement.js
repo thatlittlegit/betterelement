@@ -61,6 +61,14 @@ var DefaultBetterElements = {
   }
 }
 
+var Element = {
+  // Use Element.create(name)
+  create: function(name){
+    var i = new Element();
+    i.name = name;
+    return i;
+  }
+}
 function Element() {
   var attributes;
   var attributeExist;
@@ -71,12 +79,6 @@ function Element() {
   var attributeMissing;
   var elementsRead = false;
   var readFailed;
-
-  this.create = function(name) {
-    var i = new Element();
-    i.name = name;
-    return i;
-  };
 
   var addAttribute = function(name) {
     // AttributeExist MUST come first, otherwise attributeCount() will
