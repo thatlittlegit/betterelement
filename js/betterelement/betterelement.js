@@ -63,12 +63,13 @@ var DefaultBetterElements = {
 
 var Element = {
   // Use Element.create(name)
-  create: function(name){
+  create: function(name) {
     var i = new Element();
     i.name = name;
     return i;
   }
 }
+
 function Element() {
   var attributes;
   var attributeExist;
@@ -196,5 +197,4 @@ function InputType() {
         }
     }
   };
-}
 }
