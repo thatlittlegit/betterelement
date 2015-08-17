@@ -25,7 +25,7 @@ var DefaultBetterElements = {
     var clock = Element.create("clock");
     var type = clock.addAttribute("type");
     clock.readFailed = function(att) {
-      console.warn("BetterElement: Index " + clock.currentIndex + " missing " + att.name + " attribute!")
+      console.warn("BetterElement: Index " + clock.currentIndex + " missing " + att.name + " attribute!");
     };
     clock.toExecuteOnRead = function() {
       if (clock.attributes[clock.findAttribute(type)] == "time") {
@@ -45,8 +45,8 @@ var DefaultBetterElements = {
     var minatt = random.addAttribute("min");
     var maxatt = random.addAttribute("max");
     random.readFailed = function(att) {
-      console.warn("BetterElement: Index " + random.currentIndex + " missing " + att.name + " attribute!")
-    }
+      console.warn("BetterElement: Index " + random.currentIndex + " missing " + att.name + " attribute!");
+    };
     random.toExecuteOnRead = function() {
       if (random.attributes[random.currentIndex] !== undefined && random.attributes[random.currentIndex] !== undefined) {
         var min = Number.parseInt(random.attributes[random.currentIndex].value);
@@ -59,7 +59,7 @@ var DefaultBetterElements = {
     };
     random.readElements();
   }
-}
+};
 
 var Element = {
   // Use Element.create(name)
@@ -68,7 +68,7 @@ var Element = {
     i.name = name;
     return i;
   }
-}
+};
 
 function Element() {
   var attributes;
@@ -77,7 +77,6 @@ function Element() {
   var name;
   var toExecute;
   var currentIndex;
-  var attributeMissing;
   var elementsRead = false;
   var readFailed;
 
@@ -113,7 +112,7 @@ function Element() {
       for (var i = 0; elements[i] !== undefined; i += 1) {
         currentIndex = i;
         for (var x = 0; x == attributes.length; i += 1) {
-          if (attributes[x].required == true && attributes[x].value === undefined) {
+          if (attributes[x].required === true && attributes[x].value === undefined) {
             attributes[x].missing = true;
             stopThisRead = true;
             missingAttribute = attributes[x];
@@ -134,17 +133,9 @@ function Element() {
     }
   };
 
-  var getIfAttributeExists = function(attributeIndex) {
-    if (attributes[attributeIndex] !== undefined &&
-      attributes[attributeIndex].value !== undefined) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   var findAttribute = function(attribute) {
-    for (var i; attributes[i] !== undefined; i += 1) {}
+    var i;
+    for (; attributes[i] !== undefined; i += 1) {}
     return i;
   };
 }
@@ -156,45 +147,34 @@ function Attribute(attributeName) {
   var type = InputType.TEXT;
 }
 
-function InputType() {
-  this.TEXT = 0;
-  this.NUMBER = 1;
-  this.ID = 2;
+InputType = {
+  TEXT: 0,
+  NUMBER: 1,
+  ID: 2,
 
-  this.testIfCorrect = function(toTest, against) {
-    switch (against) {
-      case 0:
+  testIfCorrect: function(toTest, against) {
+    if (against === 0) {
+      return true;
+    } else if (against == 1) {
+      if (toTest.parseInt().isNaN() === true || toTest.parseDouble().isNaN() === true) {
+        return false;
+      } else {
         return true;
-      case 1:
-        if (toTest.parseInt().isNaN() === true || toTest.parseDouble().isNaN === true) {
-          return false;
-        } else {
-          return true;
-        }
-      case 2:
-        // Use testIfCorrect(toTest, against, index) instead
-        console.warn("BetterElement: Got 2 (InputType.ID) as input, however no index specified!");
+      }
+    } else if (against == 2) {
+      // Use testIfCorrectWithArray(toTest, against, index) instead
+      console.warn("BetterElement: Got 2 (InputType.ID) as input, however no index specified!");
+      return null;
     }
-  };
 
-  this.testIfCorrect = function(toTest, against, index) {
-    switch (against) {
-      case 0:
+    this.testIfCorrectWithArray = function(toTest, string) {
+      var i;
+      for (; toTest[i] !== string || toTest[i] === undefined; i += 1) {}
+      if (i == array.length) {
         return true;
-      case 1:
-        if (toTest.parseInt().isNaN() === true || toTest.parseDouble().isNaN() === true) {
-          return false;
-        } else {
-          return true;
-        }
-      case 2:
-        var i;
-        for (; toTest[i] !== toTest[index] || i === index; i += 1) {}
-        if (i == array.length) {
-          return true;
-        } else {
-          return false;
-        }
-    }
-  };
-}
+      } else {
+        return false;
+      }
+    };
+  }
+};
