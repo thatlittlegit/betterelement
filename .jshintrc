@@ -1,0 +1,7 @@
+{
+  "esnext":true,
+  "undef":true,
+  "predef":[
+    "window", "console", "document"
+  ]
+}
