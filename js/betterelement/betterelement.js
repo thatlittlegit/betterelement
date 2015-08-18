@@ -1,9 +1,11 @@
 /*
- * BetterElement 2.1-PR7/1
+ * BetterElement 2.1-PR7/2
  * Status: Testing & Correcting Syntax
  */
 // Log a message to the console
 var log = console.log || window.console.log || undefined;
+var wrn = console.warn || window.console.log || undefined; // OK, I purposely moved this. :|
+var err = console.error || window.console.error || undefined;
 var date = new Date();
 
 function betterElement() {
@@ -27,7 +29,7 @@ var doClock = function() {
   var clock = new Element("clock");
   var type = clock.addAttribute("type");
   clock.readFailed = function(att) {
-    window.console.warn("BetterElement: Index " + clock.currentIndex + " missing " + att.name + " attribute!");
+    wrn("BetterElement: Index " + clock.currentIndex + " missing " + att.name + " attribute!");
   };
   clock.toExecuteOnRead = function() {
     if (clock.attributes[clock.findAttribute(type)] == "time") {
@@ -36,7 +38,7 @@ var doClock = function() {
       clock.elementsToRead[clock.currentIndex].innerHTML = getDate();
     } else {
       clock.elementsToRead[clock.currentIndex].innerHTML = "???";
-      console.error("Invalid attribute \"type\" on index " + clock.currentIndex + "!");
+      err("Invalid attribute \"type\" on index " + clock.currentIndex + "!");
     }
   };
   clock.readElements();
@@ -47,7 +49,7 @@ var doRandom = function() {
   var minatt = random.addAttribute("min");
   var maxatt = random.addAttribute("max");
   random.readFailed = function(att) {
-    console.warn("BetterElement: Index " + random.currentIndex + " missing " + att.name + " attribute!");
+    wrn("BetterElement: Index " + random.currentIndex + " missing " + att.name + " attribute!");
   };
   random.toExecuteOnRead = function() {
     var min = Number.parseInt(random.attributes[random.currentIndex].value);
@@ -92,7 +94,7 @@ function Element(nname) {
       attributes[count].value = elementsToRead[count].getAttribute(attributes[count].name);
     }
     if (this.toExecuteOnRead === undefined) {
-      console.error("BetterElement: Failed to read elements for element " + name + ", no changes will be applied!");
+      err("BetterElement: Failed to read elements for element " + name + ", no changes will be applied!");
     } else {
       var stopThisRead = false;
       var missingAttribute;
