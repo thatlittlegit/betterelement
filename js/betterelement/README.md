@@ -1,6 +1,45 @@
 # BetterElement
+##### *A part of the wAPI*
+
 Create your own elements through client-side JavaScript.
-## JavaScript
+
+## Guide
+*A guide to the world's unknown...*
+### Basics
+#### Referencing in the HTML
+To start using BE, you'll need to reference it in some code. As you'll probably use client-side JS, you'll
+incorperate it in the HTML.
+- ~~Bower~~ (not yet working...)
+* Download the wAPI source and copy the betterelement.js onto your server
+    ```html
+    <script src="where/you/put/your/betterelement/file.js">
+    ```
+* Reference BitBucket's server.
+    ```html
+    <script src="https://bitbucket.org/wapidstyle/wapi/raw/2da31891ed8649e7374f156d513cc02da1179699/js/betterelement/betterelement.js">
+    ```
+    
+    Note that using the above code will give you 2.0/1. If you want to use 2.1/0 (currently in non-working beta), replace
+    the SHA256 hash with `master`.
+    
+    
+* Use [WebLibrary](https://bitbucket.org/wapidstyle/wapi/src/master/js/weblibrary/).
+
+After you've used one of these, you can start.
+
+#### Creating an element that turns into "Hello, World!" if the g attribute is "true"
+1. Create a function and define an Element as well as name it. (If you are using 2.0/1, then you can use the
+global createElement() function (which returns a new element), however this has been removed in 2.1/0. 
+To keep your code working good, I would advise using 2.0/1 for now, but use `new Element()` instead.)
+    ```javascript
+    function doHello(){
+        var hello = new Element();
+    }
+    ```
+    
+2. Run 
+
+## JavaScript Description
 ### Functions
 *Only includes those described in the Root Element, sub-functions defined at a smaller index*
 #### `betterElement()`
