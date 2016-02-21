@@ -1,7 +1,12 @@
 {
-    "validateQuoteMarks": {
-        "escape": true,
-        "mark": "\""
-    },
-    "esnext": true
+  "validateQuoteMarks": {
+    "escape": true,
+    "mark": "\""
+  },
+  "esnext": true,
+  "validateLineBreaks": "CRLF",
+  "requireSpacesInAnonymousFunctionExpression":false,
+  "requirePaddingNewLinesAfterBlocks":false,
+  "requirePaddingNewLinesBeforeLineComments":false,
+  "requireSemicolons":false
 }
