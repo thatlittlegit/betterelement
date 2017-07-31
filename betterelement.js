@@ -58,6 +58,12 @@ function createElement(name) {
     return blankElement;
 }
 
+function Attribute(name, value) {
+  var name = name;
+  var value = value || null;
+  
+  return this;
+}
 
 function Element(){
   var attributes;
@@ -69,14 +75,14 @@ function Element(){
   var currentReadElement;
 
   this.addAttribute = function(attributename) {
-      this.attributes[attributeCount] = attributename;
+      this.attributes[attributeCount] = new Attribute(attributename);
       this.attributeCount += 1;
   };
 
   this.delAttribute = function(attributename) {
       var i = 0;
       for (; this.attributes[i] != attributename; i += 1) {}
-      this.attributes[i] = "DELETED_ELEMENT";
+      array.splice(i, 1);
   };
 
   this.readElements = function() {
