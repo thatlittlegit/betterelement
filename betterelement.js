@@ -90,11 +90,11 @@ function Element(){
       if (toExecuteOnRead === null) {
           console.error(this.name + " executed readElements() without a toExecuteOnRead!");
       } else {
-          for (var i = 0; this.elements[i] !== undefined; i += 1) {
-              this.currentReadIndex = i;
-              this.currentReadElement = this.elements[i];
-              this.toExecuteOnRead();
-          }
+          this.elements.forEach(function(element, index) {
+            this.currentReadIndex = index;
+            this.currentReadElement = element;
+            this.toExecuteOnRead();
+          });
       }
   };
 
