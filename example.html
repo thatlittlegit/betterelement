@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BetterElement Manual</title>
+    <meta charset="utf-8">
+    <script src="betterelement.js"></script>
+  </head>
+  <body>
+    <h1>BetterElement</h1>
+    <p>
+      BetterElement lets you create custom tags in JavaScript. You can then use
+      these in your HTML with attributes.
+    </p>
+    <p>
+      BetterElement adds some tags by default. See creating your own below to make some yourself.
+      Below is the <code>&lt;clock&gt;</code> tag, in <code>time</code> mode specified by the
+      <code>type</code> attribute.
+    </p>
+    <clock type="time"></clock>
+    <p>
+      To prove that it works many times in an document, here is another. This one is in <code>date</code>
+      format specified by the <code>type</code> attribute.
+    </p>
+    <clock type="date"></clock>
+    <p>
+      There is also the <code>&lt;random&gt;</code> tag. Using the required <code>min</code> and <code>max</code>
+      attributes, it generates a random number between them. <code>&lt;random min="10" max="20"&gt;</code> would
+      produce <code><random min="10" max="20"></random></code>. You can reload the page to notice them change.
+    </p>
+    <h2>Creating your own</h2>
+    <p>
+      You can create your own by importing BetterElement and utilising the Element class to create and read elements.
+      To learn how, visit <a href="https://wapidstyle.github.io/wapi/subprojects/betterelement.html">
+      https://wapidstyle.github.io/wapi/subprojects/betterelement.html</a>.
+    </p>
+    <script>
+      betterElement()
+    </script>
+  </body>
+</html>
