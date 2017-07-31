@@ -6,7 +6,7 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['mocha','chai'],
     files: [
-      '*browsertest.js',
+      '*test.js',
       'betterelement.js'
     ],
     port: 9876,
@@ -15,6 +15,17 @@ module.exports = function(config) {
     autoWatch: true,
     browsers: ['Firefox', 'PhantomJS'],
     singleRun: true,
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    reporters: ['spec', 'coverage'],
+
+    preprocessors: {
+      'betterelement.js': ['coverage']
+    },
+    
+    coverageReporter: {
+      type : 'lcov',
+      dir : 'coverage/'
+    }
   })
 }
