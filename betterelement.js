@@ -86,14 +86,15 @@ function Element(){
   };
 
   this.readElements = function() {
-      this.elements = document.getElementsByTagName(this.name);
+      this.elements = [].slice.call(document.getElementsByTagName(this.name));
       if (toExecuteOnRead === null) {
           console.error(this.name + " executed readElements() without a toExecuteOnRead!");
       } else {
+          var _this = this;
           this.elements.forEach(function(element, index) {
-            this.currentReadIndex = index;
-            this.currentReadElement = element;
-            this.toExecuteOnRead();
+            _this.currentReadIndex = index;
+            _this.currentReadElement = element;
+            _this.toExecuteOnRead();
           });
       }
   };
