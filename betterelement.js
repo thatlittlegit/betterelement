@@ -11,7 +11,7 @@ function doClock() {
             clockElement.currentReadElement.innerHTML = new Date().toLocaleDateString();
         } else {
             clockElement.currentReadElement.innerHTML = "Failed to get time/date - invalid attribute";
-            console.error("Invalid attribute \"type\" on index " + clockElement.currentReadIndex + "!");
+            throw new Error("Invalid \"type\" attribute on index " + clockElement.currentReadIndex + "!");
         }
     };
     clockElement.readElements();
@@ -25,7 +25,7 @@ function doRandom() {
           var max = Number.parseInt(randomElement.currentReadElement.getAttribute("max"));
           randomElement.currentReadElement.innerHTML = Math.floor(Math.random() * (max - min) + min);
       } else {
-          console.error("Error on index " + randomElement.currentReadIndex + " of <random>;" +
+          throw new Error("Error on index " + randomElement.currentReadIndex + " of <random>;" +
            "missing min or max parameter(s)!");
       }
     };
@@ -70,7 +70,7 @@ function Element(){
   this.readElements = function() {
       this.elements = [].slice.call(document.getElementsByTagName(this.name));
       if (toExecuteOnRead === null) {
-          console.error(this.name + " executed readElements() without a toExecuteOnRead!");
+          throw new Error(this.name + " executed readElements() without a toExecuteOnRead!");
       } else {
           var _this = this;
           this.elements.forEach(function(element, index) {
