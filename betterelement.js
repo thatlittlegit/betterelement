@@ -3,7 +3,7 @@
 ////////////////////////////////
 
 function doClock() {
-    var clockElement = createElement("clock");
+    var clockElement = new Element("clock");
     clockElement.toExecuteOnRead = function(index, element) {
         if (element.getAttribute("type") == "time") {
             element.innerHTML = new Date().toLocaleTimeString();
@@ -18,7 +18,7 @@ function doClock() {
 }
 
 function doRandom() {
-    var randomElement = createElement("random");
+    var randomElement = new Element("random");
     randomElement.toExecuteOnRead = function(index, element){
       if (element.getAttribute("min") !== undefined && element.getAttribute("max") !== undefined){
           var min = Number.parseInt(element.getAttribute("min"));
@@ -34,12 +34,6 @@ function doRandom() {
     randomElement.readElements();
 }
 
-function createElement(name) {
-    var blankElement = new Element();
-    blankElement.name = name;
-    return blankElement;
-}
-
 function Attribute(name, value) {
   var name = name;
   var value = value || null;
@@ -47,11 +41,11 @@ function Attribute(name, value) {
   return this;
 }
 
-function Element(){
+function Element(name){
   var attributes;
   var attributeCount = 0;
   var elements;
-  var name;
+  var name = name;
   var toExecuteOnRead;
 
   this.addAttribute = function(attributename) {
