@@ -1,32 +1,14 @@
 /////////////////////////////////
 // BetterElement 2.0/1         /
 ////////////////////////////////
-var date = new Date();
-
-function betterElement() {
-    doClock();
-    doRandom();
-}
-
-function getTime() {
-    return date.toLocaleTimeString();
-}
-
-function getDate() {
-    return date.toLocaleDateString();
-}
-
-function getRandom(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
 function doClock() {
     var clockElement = createElement("clock");
     clockElement.toExecuteOnRead = function () {
         if (clockElement.currentReadElement.getAttribute("type") == "time") {
-            clockElement.currentReadElement.innerHTML = getTime();
+            clockElement.currentReadElement.innerHTML = new Date().toLocaleTimeString();
         } else if (clockElement.currentReadElement.getAttribute("type") == "date") {
-            clockElement.currentReadElement.innerHTML = getDate();
+            clockElement.currentReadElement.innerHTML = new Date().toLocaleDateString();
         } else {
             clockElement.currentReadElement.innerHTML = "Failed to get time/date - invalid attribute";
             console.error("Invalid attribute \"type\" on index " + clockElement.currentReadIndex + "!");
@@ -41,7 +23,7 @@ function doRandom() {
       if (randomElement.currentReadElement.getAttribute("min") !== undefined && randomElement.currentReadElement.getAttribute("max") !== undefined){
           var min = Number.parseInt(randomElement.currentReadElement.getAttribute("min"));
           var max = Number.parseInt(randomElement.currentReadElement.getAttribute("max"));
-          randomElement.currentReadElement.innerHTML = getRandom(min, max);
+          randomElement.currentReadElement.innerHTML = Math.floor(Math.random() * (max - min) + min);
       } else {
           console.error("Error on index " + randomElement.currentReadIndex + " of <random>;" +
            "missing min or max parameter(s)!");
