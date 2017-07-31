@@ -4,14 +4,14 @@
 
 function doClock() {
     var clockElement = createElement("clock");
-    clockElement.toExecuteOnRead = function () {
-        if (clockElement.currentReadElement.getAttribute("type") == "time") {
-            clockElement.currentReadElement.innerHTML = new Date().toLocaleTimeString();
-        } else if (clockElement.currentReadElement.getAttribute("type") == "date") {
-            clockElement.currentReadElement.innerHTML = new Date().toLocaleDateString();
+    clockElement.toExecuteOnRead = function(index, element) {
+        if (element.getAttribute("type") == "time") {
+            element.innerHTML = new Date().toLocaleTimeString();
+        } else if (element.getAttribute("type") == "date") {
+            element.innerHTML = new Date().toLocaleDateString();
         } else {
-            clockElement.currentReadElement.innerHTML = "Failed to get time/date - invalid attribute";
-            throw new Error("Invalid \"type\" attribute on index " + clockElement.currentReadIndex + "!");
+            element.innerHTML = "Failed to get time/date - invalid attribute";
+            throw new Error("Invalid \"type\" attribute on index " + index + "!");
         }
     };
     clockElement.readElements();
@@ -19,13 +19,13 @@ function doClock() {
 
 function doRandom() {
     var randomElement = createElement("random");
-    randomElement.toExecuteOnRead = function(){
-      if (randomElement.currentReadElement.getAttribute("min") !== undefined && randomElement.currentReadElement.getAttribute("max") !== undefined){
-          var min = Number.parseInt(randomElement.currentReadElement.getAttribute("min"));
-          var max = Number.parseInt(randomElement.currentReadElement.getAttribute("max"));
-          randomElement.currentReadElement.innerHTML = Math.floor(Math.random() * (max - min) + min);
+    randomElement.toExecuteOnRead = function(index, element){
+      if (element.getAttribute("min") !== undefined && element.getAttribute("max") !== undefined){
+          var min = Number.parseInt(element.getAttribute("min"));
+          var max = Number.parseInt(element.getAttribute("max"));
+          element.innerHTML = Math.floor(Math.random() * (max - min) + min);
       } else {
-          throw new Error("Error on index " + randomElement.currentReadIndex + " of <random>;" +
+          throw new Error("Error on index " + index + " of <random>;" +
            "missing min or max parameter(s)!");
       }
     };
@@ -53,8 +53,6 @@ function Element(){
   var elements;
   var name;
   var toExecuteOnRead;
-  var currentReadIndex;
-  var currentReadElement;
 
   this.addAttribute = function(attributename) {
       this.attributes[attributeCount] = new Attribute(attributename);
@@ -74,9 +72,7 @@ function Element(){
       } else {
           var _this = this;
           this.elements.forEach(function(element, index) {
-            _this.currentReadIndex = index;
-            _this.currentReadElement = element;
-            _this.toExecuteOnRead();
+            _this.toExecuteOnRead(index, element);
           });
       }
   };
