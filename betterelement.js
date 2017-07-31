@@ -41,11 +41,11 @@ function Attribute(name, value) {
   return this;
 }
 
-function Element(name){
+function Element(nameParam){
   var attributes;
   var attributeCount = 0;
   var elements;
-  var name = name;
+  var name = nameParam;
   var toExecuteOnRead;
 
   this.addAttribute = function(attributename) {
