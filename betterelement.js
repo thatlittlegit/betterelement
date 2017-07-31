@@ -42,11 +42,10 @@ function Attribute(name, value) {
 }
 
 function Element(nameParam){
-  var attributes;
-  var attributeCount = 0;
-  var elements;
-  var name = nameParam;
-  var toExecuteOnRead;
+  this.attributes = [];
+  this.attributeCount = 0;
+  this.name = nameParam;
+  this.toExecuteOnRead = undefined;
 
   this.addAttribute = function(attributename) {
       this.attributes[attributeCount] = new Attribute(attributename);
@@ -61,7 +60,7 @@ function Element(nameParam){
 
   this.readElements = function() {
       this.elements = [].slice.call(document.getElementsByTagName(this.name));
-      if (toExecuteOnRead === null) {
+      if (this.toExecuteOnRead === null) {
           throw new Error(this.name + " executed readElements() without a toExecuteOnRead!");
       } else {
           var _this = this;
