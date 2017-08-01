@@ -5,7 +5,7 @@
   "main": "betterelement.js",
   "scripts": {
     "test": "karma start",
-    "lint": "remark ."
+    "lint": "xo && remark ."
   },
   "repository": {
     "type": "git",
@@ -29,11 +29,20 @@
     "karma-spec-reporter": "0.0.31",
     "mocha": "^3.4.2",
     "remark-cli": "^4.0.0",
-    "remark-preset-lint-recommended": "^3.0.0"
+    "remark-preset-lint-recommended": "^3.0.0",
+    "xo": "^0.18.2"
   },
   "remarkConfig": {
     "plugins": [
       "remark-preset-lint-recommended"
     ]
+  },
+  "__@1": "The no-var and prefer-arrow-callback are to maintain compat with",
+  "__@2": "pathetic older browsers and stay with ES5 :(. ~littlegit",
+  "xo": {
+    "rules": {
+      "no-var": 0,
+      "prefer-arrow-callback": 0
+    }
   }
 }
