@@ -5,9 +5,9 @@
 function doClock() {
 	var clockElement = new Element('clock');
 	clockElement.toExecuteOnRead = function (index, element) {
-		if (element.getAttribute('type') == 'time') {
+		if (element.getAttribute('type') === 'time') {
 			element.innerHTML = new Date().toLocaleTimeString();
-		} else if (element.getAttribute('type') == 'date') {
+		} else if (element.getAttribute('type') === 'date') {
 			element.innerHTML = new Date().toLocaleDateString();
 		} else {
 			element.innerHTML = 'Failed to get time/date - invalid attribute';
@@ -23,20 +23,20 @@ function doRandom() {
 		if (element.getAttribute('min') !== undefined && element.getAttribute('max') !== undefined) {
 			var min = Number(element.getAttribute('min'));
 			var max = Number(element.getAttribute('max'));
-			element.innerHTML = Math.floor(Math.random() * (max - min) + min);
+			element.innerHTML = Math.floor((Math.random() * (max - min)) + min);
 		} else {
 			throw new Error('Error on index ' + index + ' of <random>;' +
            'missing min or max parameter(s)!');
 		}
 	};
-    // randomElement.addAttribute("min");
-    // randomElement.addAttribute("max");
+	randomElement.addAttribute('min');
+	randomElement.addAttribute('max');
 	randomElement.readElements();
 }
 
-function Attribute(name, value) {
-	var name = name;
-	var value = value || null;
+function Attribute(nameParam, valueParam) {
+	this.name = nameParam;
+	this.value = valueParam || null;
 
 	return this;
 }
@@ -48,14 +48,14 @@ function Element(nameParam) {
 	this.toExecuteOnRead = undefined;
 
 	this.addAttribute = function (attributename) {
-		this.attributes[attributeCount] = new Attribute(attributename);
+		this.attributes[this.attributeCount] = new Attribute(attributename);
 		this.attributeCount += 1;
 	};
 
 	this.delAttribute = function (attributename) {
 		var i = 0;
-		for (; this.attributes[i] != attributename; i += 1) {}
-		array.splice(i, 1);
+		for (; this.attributes[i] !== attributename; i += 1) { /* empty */ }
+		this.attributes.splice(i, 1);
 	};
 
 	this.readElements = function () {

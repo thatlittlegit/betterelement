@@ -1,3 +1,4 @@
+/* global doRandom, doClock */
 describe('BetterElement', function () {
 	it('should create a random number between two numbers when <random> is used', function () {
 		document.body.innerHTML = '<random min=\'0\' max=\'100\'></random>';
