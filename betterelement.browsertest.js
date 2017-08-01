@@ -3,7 +3,7 @@ describe("BetterElement", function() {
     document.body.innerHTML = "<random min='0' max='100'></random>";
     doRandom();
     
-    Number.parseInt(document.getElementsByTagName("random")[0].innerHTML).should.be.at.least(0).and.at.most(100);
+    Number(document.getElementsByTagName("random")[0].innerHTML).should.be.at.least(0).and.at.most(100);
     
     document.body.innerHTML = "";
   });

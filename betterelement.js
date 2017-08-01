@@ -21,8 +21,8 @@ function doRandom() {
     var randomElement = new Element("random");
     randomElement.toExecuteOnRead = function(index, element){
       if (element.getAttribute("min") !== undefined && element.getAttribute("max") !== undefined){
-          var min = Number.parseInt(element.getAttribute("min"));
-          var max = Number.parseInt(element.getAttribute("max"));
+          var min = Number(element.getAttribute("min"));
+          var max = Number(element.getAttribute("max"));
           element.innerHTML = Math.floor(Math.random() * (max - min) + min);
       } else {
           throw new Error("Error on index " + index + " of <random>;" +
