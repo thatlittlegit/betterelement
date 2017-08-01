@@ -1,4 +1,4 @@
-# BetterElement
+# BetterElement [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement)
 Create your own elements through client-side JavaScript.
 ## JavaScript
 ### Functions
