@@ -78,3 +78,14 @@ function Element(nameParam) {
 		return this.attributes;
 	};
 }
+
+if (module && module.exports) {
+	module.exports = {
+		Attribute,
+		Element,
+		builtins: {
+			doRandom,
+			doClock
+		}
+	};
+}
