@@ -1,6 +1,6 @@
-/////////////////////////////////
-// BetterElement 2.0/1         /
-////////////////////////////////
+/*
+ * BetterElement: Create custom HTML elements through client-side JS.
+ */
 
 function doClock() {
     var clockElement = new Element("clock");
