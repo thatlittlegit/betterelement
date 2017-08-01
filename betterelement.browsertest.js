@@ -26,5 +26,19 @@ describe("BetterElement", function() {
     document.body.innerHTML = "";
   });
   
+  it("should throw an exception when <random> is used with no min and/or max element", function() {
+    document.body.innerHTML = "<random></random>";
+    doRandom.should.throw();
+    
+    document.body.innerHTML = "<random min='0'></random>"
+    doRandom.should.throw();
+    
+    document.body.innerHTML = "<random max='100'></random>"
+    doRandom.should.throw();
+    
+    document.body.innerHTML = "<random min='0' max='100'></random>"
+    doRandom.should.not.throw();
+  });
+  
   it("should show Hello, World when a custom <hello> is used");
 });
