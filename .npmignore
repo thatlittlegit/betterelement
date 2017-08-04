@@ -3,3 +3,4 @@
 karma.conf.js
 *.html
 *\.*
+*.md
