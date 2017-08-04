@@ -14,6 +14,7 @@ function doClock() {
 			throw new Error('Invalid "type" attribute on index ' + index + '!');
 		}
 	};
+	clockElement.addAttribute('type');
 	clockElement.readElements();
 }
 
@@ -34,9 +35,10 @@ function doRandom() {
 	randomElement.readElements();
 }
 
-function Attribute(nameParam, valueParam) {
+function Attribute(nameParam, requiredParam, valueParam) {
 	this.name = nameParam;
 	this.value = valueParam || null;
+	this.required = requiredParam || true;
 
 	return this;
 }
@@ -65,6 +67,11 @@ function Element(nameParam) {
 		} else {
 			var _this = this;
 			this.elements.forEach(function (element, index) {
+				_this.attributes.forEach(function (attribute) {
+					if (attribute.required && !element.getAttribute(attribute.name)) {
+						throw new Error("Missing attribute " + attribute.name + " in element " + index);
+					}
+				});
 				_this.toExecuteOnRead(index, element);
 			});
 		}
