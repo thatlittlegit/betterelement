@@ -79,13 +79,21 @@ function Element(nameParam) {
 	};
 }
 
-if (module && module.exports) {
-	module.exports = {
-		Attribute,
-		Element,
-		builtins: {
-			doRandom,
-			doClock
-		}
-	};
+try {
+	if (module && module.exports) {
+		module.exports = {
+			Attribute,
+			Element,
+			builtins: {
+				doRandom,
+				doClock
+			}
+		};
+	}
+} catch (err) {
+	if (err instanceof ReferenceError) {
+		// ignore
+	} else {
+		throw err;
+	}
 }
