@@ -43,7 +43,7 @@
     "rules": {
       "no-var": 0,
       "prefer-arrow-callback": 0,
-			"no-warning-comments": 0
+      "no-warning-comments": 0
     },
     "envs": [
       "browser",
