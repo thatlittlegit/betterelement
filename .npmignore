@@ -1,0 +1,5 @@
+.travis.yml
+*test.js
+karma.conf.js
+*.html
+*\.*
