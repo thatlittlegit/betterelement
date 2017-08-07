@@ -12,11 +12,11 @@ function doClock() {
 		}
 	};
 	clockElement.addAttribute('type', true, function (attribute) {
-		if (attribute !== 'date' || attribute !== 'time') {
-			return false;
+		if (attribute === 'date' || attribute === 'time') {
+			return true;
 		// eslint-disable-next-line no-else-return
 		} else {
-			return true;
+			return false;
 		}
 	});
 	clockElement.readElements();
@@ -92,7 +92,10 @@ function Element(nameParam) {
 					}
 
 					if (attribute.verify) {
-						attribute.verify(element.getAttribute(attribute.name));
+						if (!attribute.verify(element.getAttribute(attribute.name))) {
+							throw new Error('Element verification failed (type ' +
+								attribute.name + ', value ' + element.getAttribute(attribute.name) + ')');
+						}
 					}
 				});
 				_this.toExecuteOnRead(index, element);
