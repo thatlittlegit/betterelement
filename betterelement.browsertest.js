@@ -41,5 +41,19 @@ describe('BetterElement', function () {
 		doRandom.should.not.throw();
 	});
 
+	it('should throw an exception when <clock> is used with an invalid type', function () {
+		document.body.innerHTML = '<clock type=\'date\'></clock>';
+		doClock.should.not.throw();
+
+		document.body.innerHTML = '<clock type=\'time\'></clock>';
+		doClock.should.not.throw();
+
+		document.body.innerHTML = '<clock type=\'lala\'></clock>';
+		doClock.should.throw();
+
+		document.body.innerHTML = '<clock type=\'1\'></clock>';
+		doClock.should.throw();
+	});
+
 	it('should show Hello, World when a custom <hello> is used');
 });
