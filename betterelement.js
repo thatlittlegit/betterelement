@@ -30,18 +30,18 @@ function doRandom() {
 	randomElement.readElements();
 }
 
-function Attribute(nameParam, requiredParam, typeParam, typesParam) {
+function Attribute(nameParam, requiredParam, typeParam, verifyParam) {
 	this.name = nameParam;
 	this.required = requiredParam || true;
 	this.type = typeParam || undefined;
-	this.types = typesParam || function () {
+	this.verify = verifyParam || function () {
 		return true;
 	};
 
 	return this;
 }
 
-Attribute.prototype.typePresets = {
+Attribute.prototype.verifyPresets = {
 	number: function (number) {
 		return !isNaN(Number(number));
 	},
@@ -60,11 +60,11 @@ function Element(nameParam) {
 	this.name = nameParam;
 	this.toExecuteOnRead = undefined;
 
-	this.addAttribute = function (attribute, required, type, types) {
+	this.addAttribute = function (attribute, required, type, verify) {
 		if (attribute instanceof Attribute) {
 			this.attributes[this.attributeCount] = attribute;
 		} else {
-			this.attributes[this.attributeCount] = new Attribute(attribute, required, type, types);
+			this.attributes[this.attributeCount] = new Attribute(attribute, required, type, verify);
 		}
 		this.attributeCount += 1;
 	};
