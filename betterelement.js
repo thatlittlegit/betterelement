@@ -30,10 +30,10 @@ function doRandom() {
 	randomElement.readElements();
 }
 
-function Attribute(nameParam, requiredParam, typeParam, verifyParam) {
+function Attribute(nameParam, requiredParam, verifyParam, valueParam) {
 	this.name = nameParam;
 	this.required = requiredParam || true;
-	this.type = typeParam || undefined;
+	this.value = valueParam || undefined;
 	this.verify = verifyParam || function () {
 		return true;
 	};
@@ -60,11 +60,11 @@ function Element(nameParam) {
 	this.name = nameParam;
 	this.toExecuteOnRead = undefined;
 
-	this.addAttribute = function (attribute, required, type, verify) {
+	this.addAttribute = function (attribute, required, verify, value) {
 		if (attribute instanceof Attribute) {
 			this.attributes[this.attributeCount] = attribute;
 		} else {
-			this.attributes[this.attributeCount] = new Attribute(attribute, required, type, verify);
+			this.attributes[this.attributeCount] = new Attribute(attribute, required, verify, value);
 		}
 		this.attributeCount += 1;
 	};
