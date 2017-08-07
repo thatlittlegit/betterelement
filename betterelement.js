@@ -30,11 +30,11 @@ function doRandom() {
 	randomElement.readElements();
 }
 
-function Attribute(nameParam, requiredParam, typeParam, valueParam) {
+function Attribute(nameParam, requiredParam, typeParam, typesParam) {
 	this.name = nameParam;
-	this.value = valueParam || null;
 	this.required = requiredParam || true;
 	this.type = typeParam || undefined;
+	this.types = typesParam || [];
 
 	return this;
 }
@@ -45,11 +45,11 @@ function Element(nameParam) {
 	this.name = nameParam;
 	this.toExecuteOnRead = undefined;
 
-	this.addAttribute = function (attribute, required, type, value) {
+	this.addAttribute = function (attribute, required, type, types) {
 		if (attribute instanceof Attribute) {
 			this.attributes[this.attributeCount] = attribute;
 		} else {
-			this.attributes[this.attributeCount] = new Attribute(attribute, required, type, value);
+			this.attributes[this.attributeCount] = new Attribute(attribute, required, type, types);
 		}
 		this.attributeCount += 1;
 	};
