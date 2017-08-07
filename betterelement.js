@@ -44,8 +44,12 @@ function Element(nameParam) {
 	this.name = nameParam;
 	this.toExecuteOnRead = undefined;
 
-	this.addAttribute = function (attributename) {
-		this.attributes[this.attributeCount] = new Attribute(attributename);
+	this.addAttribute = function (attribute, required, value) {
+		if (attribute instanceof Attribute) {
+			this.attributes[this.attributeCount] = attribute;
+		} else {
+			this.attributes[this.attributeCount] = new Attribute(attribute, required, value);
+		}
 		this.attributeCount += 1;
 	};
 
