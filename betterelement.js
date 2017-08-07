@@ -25,8 +25,8 @@ function doRandom() {
 		var max = Number(element.getAttribute('max'));
 		element.innerHTML = Math.floor((Math.random() * (max - min)) + min);
 	};
-	randomElement.addAttribute('min');
-	randomElement.addAttribute('max');
+	randomElement.addAttribute('min', true, Attribute.verifyPresets.number);
+	randomElement.addAttribute('max', true, Attribute.verifyPresets.number);
 	randomElement.readElements();
 }
 
@@ -41,7 +41,7 @@ function Attribute(nameParam, requiredParam, verifyParam, valueParam) {
 	return this;
 }
 
-Attribute.prototype.verifyPresets = {
+Attribute.verifyPresets = {
 	number: function (number) {
 		return !isNaN(Number(number));
 	},
@@ -85,6 +85,10 @@ function Element(nameParam) {
 				_this.attributes.forEach(function (attribute) {
 					if (attribute.required && !element.getAttribute(attribute.name)) {
 						throw new Error('Missing attribute ' + attribute.name + ' in element ' + index);
+					}
+
+					if (attribute.verify) {
+						attribute.verify(element.getAttribute(attribute.name));
 					}
 				});
 				_this.toExecuteOnRead(index, element);
