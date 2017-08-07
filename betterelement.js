@@ -9,12 +9,16 @@ function doClock() {
 			element.innerHTML = new Date().toLocaleTimeString();
 		} else if (element.getAttribute('type') === 'date') {
 			element.innerHTML = new Date().toLocaleDateString();
-		} else {
-			element.innerHTML = 'Failed to get time/date - invalid attribute';
-			throw new Error('Invalid "type" attribute on index ' + index + '!');
 		}
 	};
-	clockElement.addAttribute('type');
+	clockElement.addAttribute('type', true, function (attribute) {
+		if (attribute !== 'date' || attribute !== 'time') {
+			return false;
+		// eslint-disable-next-line no-else-return
+		} else {
+			return true;
+		}
+	});
 	clockElement.readElements();
 }
 
