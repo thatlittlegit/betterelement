@@ -64,7 +64,7 @@ function Element(nameParam) {
 			this.elements.forEach(function (element, index) {
 				_this.attributes.forEach(function (attribute) {
 					if (attribute.required && !element.getAttribute(attribute.name)) {
-						throw new Error("Missing attribute " + attribute.name + " in element " + index);
+						throw new Error('Missing attribute ' + attribute.name + ' in element ' + index);
 					}
 				});
 				_this.toExecuteOnRead(index, element);
