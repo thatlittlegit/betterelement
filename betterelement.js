@@ -34,10 +34,25 @@ function Attribute(nameParam, requiredParam, typeParam, typesParam) {
 	this.name = nameParam;
 	this.required = requiredParam || true;
 	this.type = typeParam || undefined;
-	this.types = typesParam || [];
+	this.types = typesParam || function () {
+		return true;
+	};
 
 	return this;
 }
+
+Attribute.prototype.typePresets = {
+	number: function (number) {
+		return !isNaN(Number(number));
+	},
+	regex: function (regex) {
+		try {
+			return new RegExp(regex) !== undefined;
+		} catch (err) {
+			return false;
+		}
+	}
+};
 
 function Element(nameParam) {
 	this.attributes = [];
