@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start",
     "lint": "xo && remark .",
-		"docs": "rimraf out && jsdoc . README.md"
+    "docs": "rimraf out && jsdoc . README.md --configure .jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "karma-firefox-launcher": "^1.0.1",
     "karma-mocha": "^1.3.0",
     "karma-spec-reporter": "0.0.31",
+    "latodoc": "github:smeijer/latodoc",
     "mocha": "^3.4.2",
     "remark-cli": "^4.0.0",
     "remark-preset-lint-recommended": "^3.0.0",
