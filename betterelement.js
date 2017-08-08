@@ -2,6 +2,12 @@
  * BetterElement: Create custom HTML elements through client-side JS.
  */
 
+/**
+  * Adds a <clock> element. If the type attribute is 'time', then show
+	* Date.toLocaleTimeString, and vice versa for 'date'.
+	*
+	* @global
+	*/
 function doClock() {
 	var clockElement = new Element('clock');
 	clockElement.toExecuteOnRead = function (index, element) {
@@ -22,6 +28,12 @@ function doClock() {
 	clockElement.readElements();
 }
 
+/**
+  * Adds a <random> tag. When min and max is valid, will generate a number
+	* between them.
+	*
+	* @global
+	*/
 function doRandom() {
 	var randomElement = new Element('random');
 	randomElement.toExecuteOnRead = function (index, element) {
