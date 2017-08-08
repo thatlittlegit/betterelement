@@ -16,11 +16,12 @@ script:
   - cat ./coverage/PhantomJS\ */lcov.info | ./node_modules/.bin/codecov
 
 after_success: |
-  if [ -n "$GITHUB_API_KEY" ]; then
-    git checkout gh-pages
+  if [ -n "$GH_TOKEN" ]; then
+    git reset --hard
+    git checkout -b gh-pages
     npm run docs
     mv out/* .
     git add -A
     git -c user.name='Travis' -c user.email='travis.ci@example.org' commit -m init
-    git push -f -q https://thatlittlegit:$GITHUB_API_KEY@github.com/thatlittlegit/betterelement gh-pages &2>/dev/null
+    git push -f -q https://thatlittlegit:$GH_TOKEN@github.com/thatlittlegit/betterelement gh-pages &2>/dev/null
   fi
