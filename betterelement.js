@@ -34,6 +34,22 @@ function doRandom() {
 	randomElement.readElements();
 }
 
+/**
+	* An object that semi-represents an HTML attribute.
+	*
+	* @constructor
+	* @global
+	* @param {String} nameParam The name of the attribute.
+	* @param {Boolean} requiredParam Weather or not the attribute is required, or if an error should be thrown if it is missing.
+	* @param {Function} verifyParam A callback to be called to verify if an attribute's value is valid.
+	* @param {String} valueParam The value of the attribute. Is undefined unless set.
+	* @returns {Attribute} The new attribute.
+
+	* @property {String} name The name of the attribute.
+	* @property {Boolean} required Weather or not the attribute is required, or if an error should be thrown if it is missing.
+	* @property {Function} verify  A callback to be called to verify if an attribute's value is valid.
+	* @property {String} value The value of the attribute. Is undefined unless set.
+  */
 function Attribute(nameParam, requiredParam, verifyParam, valueParam) {
 	this.name = nameParam;
 	this.required = requiredParam || true;
@@ -45,25 +61,78 @@ function Attribute(nameParam, requiredParam, verifyParam, valueParam) {
 	return this;
 }
 
+/**
+  * An object of preset verification methods.
+	* @type {Object}
+	* @property {Function} numbers The verification for if it is a number.
+	* @property {Function} regex The verification for if it is a valid regex.
+	* @memberof Attribute
+	*/
 Attribute.verifyPresets = {
 	number: function (number) {
 		return !isNaN(Number(number));
 	},
 	regex: function (regex) {
 		try {
+			// The 'new RegExp()' throws a SyntaxError, so we wrap in try/catch.
 			return new RegExp(regex) !== undefined;
 		} catch (err) {
-			return false;
+			if (err instanceof SyntaxError) {
+				return false;
+			// eslint-disable-next-line no-else-return
+			} else {
+				throw err;
+			}
 		}
 	}
 };
 
+/**
+  * A BetterElement element.
+	*
+	* @param {String} nameParam The name of the BetterElement (what will be inside of the <>s)
+	* @global
+	* @constructor
+	* @returns {Element}
+  */
 function Element(nameParam) {
+	/**
+	  * The attributes of a BetterElement.
+		* @type {Attribute[]}
+		*/
 	this.attributes = [];
+	/**
+	  * The number of attributes in a BetterElement.
+		* @deprecated Soon we'll use Array.push instead.
+		* @type {Number}
+		*/
 	this.attributeCount = 0;
+	/**
+	  * The name of the BetterElement. For example, in a <clock> tag
+		* would be 'clock'.
+		* @type {String}
+		* @constant
+		*/
 	this.name = nameParam;
+	/**
+	  * A callback for when an element is read. Called once for each
+		* element.
+		* @type {Function}
+		*
+		* @param {Number} index The index of the element.
+		* @param {String} element The element's contents.
+		*/
 	this.toExecuteOnRead = undefined;
 
+	/**
+	  * Adds an attribute to this.attributes.
+		*
+		* @param {Attribute|String} attribute The attribute itself, or a string for it's name.
+		* @param {Boolean} required Weather or not it is required.
+		* @param {Function} verify The verification function, called on each attribute's contents.
+		* @param {String} value The value of the attribute. Currently unused.
+		* @returns {Attribute} The finished attribute.
+		*/
 	this.addAttribute = function (attribute, required, verify, value) {
 		if (attribute instanceof Attribute) {
 			this.attributes[this.attributeCount] = attribute;
@@ -71,14 +140,29 @@ function Element(nameParam) {
 			this.attributes[this.attributeCount] = new Attribute(attribute, required, verify, value);
 		}
 		this.attributeCount += 1;
+		return this.attributes[this.attributeCount - 1];
 	};
 
+	/**
+	  * Deletes an attribute from this.attributes.
+		*
+		* @param {String} attributename The attribute name to find and delete.
+		*/
 	this.delAttribute = function (attributename) {
 		var i = 0;
 		for (; this.attributes[i] !== attributename; i += 1) { /* empty */ }
 		this.attributes.splice(i, 1);
 	};
 
+	/**
+	  * Reads all the current elements and parses them.
+		*
+		* <br/><b>Note</b>: Soon this may be split into seperate functions.
+		*
+		* @throws <b>Error</b> if readElements is run without a toExecuteOnRead
+		* @throws <b>Error</b> if an attribute is missing that is marked as required.
+		* @throws <b>Error</b> if attribute verification failed.
+		*/
 	this.readElements = function () {
 		this.elements = [].slice.call(document.getElementsByTagName(this.name));
 		if (this.toExecuteOnRead === null) {
@@ -103,10 +187,20 @@ function Element(nameParam) {
 		}
 	};
 
+	/**
+		* Fetches all appropiate elements from the DOM.
+		*
+		* @returns {HTMLCollection}
+	  */
 	this.getElements = function () {
 		return document.getElementsByTagName(this.name);
 	};
 
+	/**
+	  * Returns all attributes.
+		* @returns {Attributes[]} The values of this.attributes.
+		* @deprecated Get them from this.attributes instead.
+		*/
 	this.getAttributes = function () {
 		return this.attributes;
 	};
