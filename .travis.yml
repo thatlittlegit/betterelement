@@ -18,8 +18,8 @@ script:
 after_success: |
   if [ -n "$GITHUB_API_KEY" ]; then
     git checkout gh-pages
-		npm run docs
-		mv out/* .
+    npm run docs
+    mv out/* .
     git add -A
     git -c user.name='Travis' -c user.email='travis.ci@example.org' commit -m init
     git push -f -q https://thatlittlegit:$GITHUB_API_KEY@github.com/thatlittlegit/betterelement gh-pages &2>/dev/null
