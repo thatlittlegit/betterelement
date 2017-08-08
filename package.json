@@ -6,7 +6,7 @@
   "scripts": {
     "test": "karma start",
     "lint": "xo && remark .",
-		"docs": "rimraf out && jsdoc ."
+		"docs": "rimraf out && jsdoc . README.md"
   },
   "repository": {
     "type": "git",
