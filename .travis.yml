@@ -12,8 +12,7 @@ before_script:
 
 script:
   - npm run lint
-  - npm test
-  - cat ./coverage/PhantomJS\ */lcov.info | ./node_modules/.bin/codecov
+  - npm test ; codecov
 
 after_success: |
   if [ -n "$GH_TOKEN" ]; then
