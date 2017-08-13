@@ -15,7 +15,8 @@ describe('The Element constructor', function () {
 		element.attributes[0].should.deep.equal(new Attribute('jargon', true, verifyFunction));
 
 		element.delAttribute('jargon');
-		element.attributes[0].should.be.undefined;
+		// Use expect because should fails
+		expect(element.attributes[0]).to.be.undefined;
 	});
 
 	it('should throw an error if readElements is thrown without a toExecuteOnRead', function () {

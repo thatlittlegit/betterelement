@@ -159,11 +159,13 @@ function Element(nameParam) {
 	  * Deletes an attribute from this.attributes.
 		*
 		* @param {String} attributename The attribute name to find and delete.
+		* @returns {Attribute} The deleted attribute
 		*/
 	this.delAttribute = function (attributename) {
-		var i = 0;
-		for (; this.attributes[i] !== attributename; i += 1) { /* empty */ }
+		for (var i = 0; this.attributes[i].name !== attributename; i += 1) { /* empty */ }
+		var attribute = this.attributes[i];
 		this.attributes.splice(i, 1);
+		return attribute;
 	};
 
 	/**
@@ -177,7 +179,7 @@ function Element(nameParam) {
 		*/
 	this.readElements = function () {
 		this.elements = [].slice.call(document.getElementsByTagName(this.name));
-		if (this.toExecuteOnRead === null) {
+		if (!this.toExecuteOnRead) {
 			throw new Error(this.name + ' executed readElements() without a toExecuteOnRead!');
 		} else {
 			var _this = this;
