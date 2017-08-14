@@ -42,7 +42,7 @@ describe('The Element constructor', function () {
 	it('should duplicate an attribute if an attribute is provided to addAttribute', function () {
 		var element = new Element('hi');
 		element.addAttribute(new Attribute('hi'));
-		elements.attributes[0].should.equal(new Attribute('hi'));
+		element.attributes[0].toString().should.deep.equal(new Attribute('hi').toString());
 	});
 });
 
