@@ -162,7 +162,8 @@ function Element(nameParam) {
 		* @returns {Attribute} The deleted attribute
 		*/
 	this.delAttribute = function (attributename) {
-		for (var i = 0; this.attributes[i].name !== attributename; i += 1) { /* empty */ }
+		var i = 0;
+		for (; this.attributes[i].name !== attributename; i += 1) { /* empty */ }
 		var attribute = this.attributes[i];
 		this.attributes.splice(i, 1);
 		return attribute;
@@ -179,9 +180,7 @@ function Element(nameParam) {
 		*/
 	this.readElements = function () {
 		this.elements = [].slice.call(document.getElementsByTagName(this.name));
-		if (!this.toExecuteOnRead) {
-			throw new Error(this.name + ' executed readElements() without a toExecuteOnRead!');
-		} else {
+		if (this.toExecuteOnRead) {
 			var _this = this;
 			this.elements.forEach(function (element, index) {
 				_this.attributes.forEach(function (attribute) {
@@ -198,6 +197,8 @@ function Element(nameParam) {
 				});
 				_this.toExecuteOnRead(index, element);
 			});
+		} else {
+			throw new Error(this.name + ' executed readElements() without a toExecuteOnRead!');
 		}
 	};
 

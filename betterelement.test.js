@@ -1,5 +1,4 @@
-// TODO
-
+/* global Attribute expect */
 describe('The Element constructor', function () {
 	it('should adjust the name when a different nameParam is supplied', function () {
 		new Element('test').name.should.deep.equal('test');
@@ -7,8 +6,8 @@ describe('The Element constructor', function () {
 
 	it('should adjust the attributes when addAttributes and delAttributes is used', function () {
 		var element = new Element('hi');
-		var verifyFunction = function(value) {
-			return Boolean('value') !== undefined;
+		var verifyFunction = function (value) {
+			return Boolean(value) !== undefined;
 		};
 
 		element.addAttribute('jargon', true, verifyFunction);
@@ -16,13 +15,14 @@ describe('The Element constructor', function () {
 
 		element.delAttribute('jargon');
 		// Use expect because should fails
+		// eslint-disable-next-line no-unused-expressions
 		expect(element.attributes[0]).to.be.undefined;
 	});
 
 	it('should throw an error if readElements is thrown without a toExecuteOnRead', function () {
 		var wrapper = function (element) {
 			return element.readElements.bind(element);
-		}
+		};
 
 		var element = new Element('hi');
 		wrapper(element).should.throw();
