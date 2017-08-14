@@ -13,7 +13,7 @@ describe('BetterElement', function () {
 		document.body.innerHTML = '<clock type=\'time\'></time>';
 		doClock();
 
-		document.getElementsByTagName('clock')[0].innerHTML.should.deep.equal(new Date().toLocaleTimeString());
+		document.getElementsByTagName('clock')[0].innerHTML.should.match(new RegExp(new Date().toLocaleTimeString().replace(/[0123456789]/, '.')));
 
 		document.body.innerHTML = '';
 	});
