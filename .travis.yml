@@ -7,8 +7,8 @@ directories:
   - "node_modules"
 
 before_install:
-  - npm install -g npm --loglevel verbose
-  - npm config set loglevel verbose --global
+  - npm install -g npm --loglevel info
+  - npm config set loglevel info --global
 
 before_script:
   - export DISPLAY=:99.0
