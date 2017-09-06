@@ -38,6 +38,19 @@ describe('The Element constructor', function () {
 		element.getElements().should.be.an.instanceof(HTMLCollection);
 		element.getElements().should.deep.equal(document.getElementsByTagName('hi'));
 	});
+
+	it('should duplicate an attribute if an attribute is provided to addAttribute', function () {
+		var element = new Element('hi');
+		element.addAttribute(new Attribute('hi'));
+		element.attributes[0].toString().should.deep.equal(new Attribute('hi').toString());
+	});
+});
+
+describe('The Attribute constructor', function () {
+	it('should change the name and required statement depending on the nameParam', function () {
+		new Attribute('hi').name.should.equal('hi');
+		new Attribute('hi', 'peanut').required.should.equal('peanut');
+	});
 });
 
 describe('The Attribute constructor', function () {
