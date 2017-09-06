@@ -39,3 +39,22 @@ describe('The Element constructor', function () {
 		element.getElements().should.deep.equal(document.getElementsByTagName('hi'));
 	});
 });
+
+describe('The Attribute constructor', function () {
+	it('should assume a dummy function if the verify function is not passed', function () {
+		new Attribute('dummy').verify().should.equal(true);
+		new Attribute('dummy', false, function () {
+			return false;
+		}).verify().should.equal(false);
+	});
+
+	it/*'s*/('number preset should return true on numbers and false otherwise', function () {
+		Attribute.verifyPresets.number(2).should.equal(true);
+		Attribute.verifyPresets.number('boo').should.equal(false);
+	});
+
+	it/*'s*/('regex preset should return true on regexes and false otherwise', function () {
+		Attribute.verifyPresets.regex('.*').should.equal(true);
+		Attribute.verifyPresets.regex('$^*').should.equal(false);
+	});
+});
