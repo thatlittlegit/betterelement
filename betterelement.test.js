@@ -51,9 +51,7 @@ describe('The Attribute constructor', function () {
 		new Attribute('hi').name.should.equal('hi');
 		new Attribute('hi', 'peanut').required.should.equal('peanut');
 	});
-});
 
-describe('The Attribute constructor', function () {
 	it('should assume a dummy function if the verify function is not passed', function () {
 		new Attribute('dummy').verify().should.equal(true);
 		new Attribute('dummy', false, function () {
@@ -61,12 +59,12 @@ describe('The Attribute constructor', function () {
 		}).verify().should.equal(false);
 	});
 
-	it/*'s*/('number preset should return true on numbers and false otherwise', function () {
+	it('number preset should return true on numbers and false otherwise', function () {
 		Attribute.verifyPresets.number(2).should.equal(true);
 		Attribute.verifyPresets.number('boo').should.equal(false);
 	});
 
-	it/*'s*/('regex preset should return true on regexes and false otherwise', function () {
+	it('regex preset should return true on regexes and false otherwise', function () {
 		Attribute.verifyPresets.regex('.*').should.equal(true);
 		Attribute.verifyPresets.regex('$^*').should.equal(false);
 	});
