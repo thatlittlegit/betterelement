@@ -113,12 +113,6 @@ function Element(nameParam) {
 		*/
 	this.attributes = [];
 	/**
-	  * The number of attributes in a BetterElement.
-		* @deprecated Soon we'll use Array.push instead.
-		* @type {Number}
-		*/
-	this.attributeCount = 0;
-	/**
 	  * The name of the BetterElement. For example, in a <clock> tag
 		* would be 'clock'.
 		* @type {String}
@@ -146,12 +140,11 @@ function Element(nameParam) {
 		*/
 	this.addAttribute = function (attribute, required, verify, value) {
 		if (attribute instanceof Attribute) {
-			this.attributes[this.attributeCount] = attribute;
+			this.attributes.push(attribute);
 		} else {
-			this.attributes[this.attributeCount] = new Attribute(attribute, required, verify, value);
+			this.attributes.push(new Attribute(attribute, required, verify, value));
 		}
-		this.attributeCount += 1;
-		return this.attributes[this.attributeCount - 1];
+		return this.attributes[this.attributes.length - 1];
 	};
 
 	/**
@@ -208,15 +201,6 @@ function Element(nameParam) {
 	  */
 	this.getElements = function () {
 		return document.getElementsByTagName(this.name);
-	};
-
-	/**
-	  * Returns all attributes.
-		* @returns {Attributes[]} The values of this.attributes.
-		* @deprecated Get them from this.attributes instead.
-		*/
-	this.getAttributes = function () {
-		return this.attributes;
 	};
 }
 
