@@ -1,4 +1,4 @@
-# BetterElement [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement)[![Docs](http://inch-ci.org/github/thatlittlegit/betterelement.svg?branch=master)](http://inch-ci.org/github/thatlittlegit/betterelement)
+# BetterElement [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement) [![Docs](http://inch-ci.org/github/thatlittlegit/betterelement.svg?branch=master)](http://inch-ci.org/github/thatlittlegit/betterelement)
 Create your own elements through client-side JavaScript.
 
 ### Installation
@@ -47,4 +47,8 @@ Results in:
 ...
 ```
 
-For more examples, see doClock and doRandom in betterelement.js.
+For more examples, see doClock and doRandom in betterelement.js. Here they are in action: (NOTE: if you are viewing this in the README, check out the [JSDoc](https://thatlittlegit.github.io/betterelement#example)!)
+
+<a name="example"></a>
+
+<iframe width="100%" height="300" src="https://jsfiddle.net/5ubw8rLy/1/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
