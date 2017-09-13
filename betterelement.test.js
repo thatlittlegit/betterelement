@@ -88,3 +88,17 @@ describe('The Attribute constructor', function () {
 		/* eslint-enable */
 	});
 });
+
+describe('The module injector', function () {
+	it('should inject into the global namespace, and module.exports if modules is defined', function () {
+		((Attribute && Element && doRandom && doClock) !== undefined).should.equal(true);
+		window.module = { exports: {} };
+
+		BEinject();
+
+		module.exports.Attribute.should.not.be.undefined;
+		module.exports.Element.should.not.be.undefined;
+		module.exports.builtins.should.not.be.undefined;
+
+	});
+});

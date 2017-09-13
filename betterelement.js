@@ -220,21 +220,19 @@ function Element(nameParam) {
 	};
 }
 
-try {
-	if (module && module.exports) {
-		module.exports = {
-			Attribute,
-			Element,
-			builtins: {
-				doRandom,
-				doClock
-			}
-		};
-	}
-} catch (err) {
-	if (err instanceof ReferenceError) {
-		// ignore
-	} else {
-		throw err;
-	}
+function BEinject () {
+	try {
+		if (module && module.exports) {
+			module.exports = {
+				Attribute,
+				Element,
+				builtins: {
+					doRandom,
+					doClock
+				}
+			};
+		}
+	} catch (err) {}
 }
+
+BEinject();
