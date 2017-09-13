@@ -91,10 +91,9 @@ Attribute.verifyPresets = {
 		} catch (err) {
 			if (err instanceof SyntaxError) {
 				return false;
-			// eslint-disable-next-line no-else-return
-			} else {
-				throw err;
 			}
+
+			throw err;
 		}
 	}
 };
