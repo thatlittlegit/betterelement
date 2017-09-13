@@ -1,4 +1,4 @@
-/* global Attribute expect */
+/* global Attribute expect doRandom doClock bEinject */
 describe('The Element constructor', function () {
 	it('should adjust the name when a different nameParam is supplied', function () {
 		new Element('test').name.should.deep.equal('test');
@@ -92,13 +92,14 @@ describe('The Attribute constructor', function () {
 describe('The module injector', function () {
 	it('should inject into the global namespace, and module.exports if modules is defined', function () {
 		((Attribute && Element && doRandom && doClock) !== undefined).should.equal(true);
-		window.module = { exports: {} };
+		window.module = {exports: {}};
 
-		BEinject();
+		bEinject();
 
+		/* eslint-disable no-unused-expressions */
 		module.exports.Attribute.should.not.be.undefined;
 		module.exports.Element.should.not.be.undefined;
 		module.exports.builtins.should.not.be.undefined;
-
+		/* eslint-enable */
 	});
 });

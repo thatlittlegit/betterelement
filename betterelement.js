@@ -220,7 +220,7 @@ function Element(nameParam) {
 	};
 }
 
-function BEinject () {
+function bEinject() {
 	try {
 		if (module && module.exports) {
 			module.exports = {
@@ -235,4 +235,4 @@ function BEinject () {
 	} catch (err) {}
 }
 
-BEinject();
+bEinject();
