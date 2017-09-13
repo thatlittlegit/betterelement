@@ -51,10 +51,10 @@ describe('BetterElement\'s default element', function () {
 			document.body.innerHTML = '<clock type=\'time\'></clock>';
 			doClock.should.not.throw();
 
-		document.body.innerHTML = '<clock type=\'lala\'></clock>';
+			document.body.innerHTML = '<clock type=\'lala\'></clock>';
 			doClock.should.throw();
 
-		document.body.innerHTML = '<clock type=\'1\'></clock>';
+			document.body.innerHTML = '<clock type=\'1\'></clock>';
 			doClock.should.throw();
 		});
 	});
