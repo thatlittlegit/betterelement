@@ -1,6 +1,6 @@
 {
   "name": "betterelement",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Create your own elements through client-side JavaScript.",
   "main": "betterelement.js",
   "scripts": {
