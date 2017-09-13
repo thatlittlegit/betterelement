@@ -1,4 +1,4 @@
-# BetterElement [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement) [![Docs](http://inch-ci.org/github/thatlittlegit/betterelement.svg?branch=master)](http://inch-ci.org/github/thatlittlegit/betterelement)
+# BetterElement [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement) [![Docs](https://inch-ci.org/github/thatlittlegit/betterelement.svg?branch=master)](https://inch-ci.org/github/thatlittlegit/betterelement)
 Create your own elements through client-side JavaScript.
 
 ### Installation
