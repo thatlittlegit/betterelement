@@ -55,5 +55,15 @@ describe('BetterElement', function () {
 		doClock.should.throw();
 	});
 
-	it('should show Hello, World when a custom <hello> is used');
+	it('should show Hello, World when a custom <hello> tag is used', function () {
+		var helloElement = new Element('hello');
+
+		helloElement.toExecuteOnRead = function (index, element) {
+			element.innerHTML = 'Hello, World';
+		};
+
+		document.body.innerHTML = '<hello></hello>';
+		helloElement.readElements();
+		document.getElementsByTagName('hello')[0].innerHTML.should.equal('Hello, World');
+	});
 });
