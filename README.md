@@ -47,8 +47,4 @@ Results in:
 ...
 ```
 
-For more examples, see doClock and doRandom in betterelement.js. Here they are in action: (NOTE: if you are viewing this in the README, check out the [JSDoc](https://thatlittlegit.github.io/betterelement#example)!)
-
-<a name="example"></a>
-
-<iframe width="100%" height="300" src="https://jsfiddle.net/5ubw8rLy/1/embedded/result,html,js/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+For more examples, see doClock and doRandom in betterelement.js. [Here it is in action!](https://jsfiddle.net/5ubw8rLy/1)
