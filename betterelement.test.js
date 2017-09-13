@@ -68,4 +68,21 @@ describe('The Attribute constructor', function () {
 		Attribute.verifyPresets.regex('.*').should.equal(true);
 		Attribute.verifyPresets.regex('$^*').should.equal(false);
 	});
+
+	it('regex preset should throw an error if an error other than SyntaxError occurs', function () {
+		var regexBackup = RegExp;
+		RegExp = null;
+
+		var ok = false;
+		// TODO Use Chai for the should-throw
+		try {
+			Attribute.verifyPresets.regex('.*');
+		} catch(err) {
+			ok = true;
+		}
+
+		ok.should.equal(true);
+
+		RegExp = regexBackup;
+	});
 });
