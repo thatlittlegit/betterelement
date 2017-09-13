@@ -70,6 +70,7 @@ describe('The Attribute constructor', function () {
 	});
 
 	it('regex preset should throw an error if an error other than SyntaxError occurs', function () {
+		/* eslint-disable no-global-assign */
 		var regexBackup = RegExp;
 		RegExp = null;
 
@@ -77,12 +78,13 @@ describe('The Attribute constructor', function () {
 		// TODO Use Chai for the should-throw
 		try {
 			Attribute.verifyPresets.regex('.*');
-		} catch(err) {
+		} catch (err) {
 			ok = true;
 		}
 
 		ok.should.equal(true);
 
 		RegExp = regexBackup;
+		/* eslint-enable */
 	});
 });
