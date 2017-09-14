@@ -204,6 +204,12 @@ function Element(nameParam) {
 	};
 }
 
+/**
+  * Injects BetterElement into module.exports if it exists.
+	*
+	* @global
+	* @private
+	*/
 function bEinject() {
 	try {
 		if (module && module.exports) {
