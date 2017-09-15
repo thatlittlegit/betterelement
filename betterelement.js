@@ -111,7 +111,6 @@ Attribute.verifyPresets.regex = function (regex) {
 	}
 };
 
-
 /**
   * A BetterElement element.
 	*
