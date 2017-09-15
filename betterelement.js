@@ -80,23 +80,37 @@ function Attribute(nameParam, requiredParam, verifyParam, valueParam) {
 	* @property {Function} regex The verification for if it is a valid regex.
 	* @memberof Attribute
 	*/
-Attribute.verifyPresets = {
-	number: function (number) {
-		return !isNaN(Number(number));
-	},
-	regex: function (regex) {
-		try {
-			// The 'new RegExp()' throws a SyntaxError, so we wrap in try/catch.
-			return new RegExp(regex) !== undefined;
-		} catch (err) {
-			if (err instanceof SyntaxError) {
-				return false;
-			}
+Attribute.verifyPresets = {};
 
-			throw err;
+/**
+  * Returns true if 'number' is a number.
+	*
+  * @param {Number|String} number The number to check
+	* @returns {Boolean} The result
+	*/
+Attribute.verifyPresets.number = function (number) {
+	return !isNaN(Number(number));
+};
+
+/**
+  * Returns true if 'regex' is a valid regular expression.
+	*
+	* @param {String|Regex} regex The regex to check
+	* @returns {Boolean} The result
+	*/
+Attribute.verifyPresets.regex = function (regex) {
+	try {
+		// The 'new RegExp()' throws a SyntaxError, so we wrap in try/catch.
+		return new RegExp(regex) !== undefined;
+	} catch (err) {
+		if (err instanceof SyntaxError) {
+			return false;
 		}
+
+		throw err;
 	}
 };
+
 
 /**
   * A BetterElement element.
