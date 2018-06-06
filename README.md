@@ -1,3 +1,19 @@
+## DEPRECATED
+Use this instead of the "Hello World" below:
+```js
+[...document.getElementsByTagName('hello')].map(element => {
+	element.innerHTML = 'hello';
+	if (Math.random() < 0.51) {
+		element.innerHTML += ' world!';
+	} else {
+		element.innerHTML += ' death!';
+	}
+});
+```
+No library needed!
+
+(For ES3, use a for loop instead.)
+
 # [BetterElement](https://thatlittlegit.github.io/betterelement) [![Build](https://img.shields.io/travis/thatlittlegit/betterelement.svg)](https://travis-ci.org/thatlittlegit/betterelement) [![Codecov](https://img.shields.io/codecov/c/github/thatlittlegit/betterelement.svg)](https://codecov.io/gh/thatlittlegit/betterelement) [![Docs](https://inch-ci.org/github/thatlittlegit/betterelement.svg?branch=master)](https://inch-ci.org/github/thatlittlegit/betterelement)
 Create your own elements through client-side JavaScript.
 
